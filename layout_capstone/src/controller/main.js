@@ -2,6 +2,21 @@ var productServices = new ProductServices();
 var productList = [];
 var cart = new Cart();
 
+// Set dữ liệu cho local storage
+function setLocalStorage() {
+  var dataString = JSON.stringify(cart.productArr);
+  localStorage.setItem("CART", dataString);
+}
+
+// Get dữ liệu cho local storage
+function getLocalStorage() {
+  if (localStorage.getItem("CART") != undefined) {
+    var dataString = localStorage.getItem("CART");
+    cart.productArr = JSON.parse(dataString);
+    renderCart(cart.productArr);
+  }
+}
+
 getLocalStorage();
 
 function getEle(id) {
@@ -177,19 +192,4 @@ function purchase() {
   cart.purchase();
   setLocalStorage();
   renderCart(cart.productArr);
-}
-
-// Set dữ liệu cho local storage
-function setLocalStorage() {
-  var dataString = JSON.stringify(cart.productArr);
-  localStorage.setItem("CART", dataString);
-}
-
-// Get dữ liệu cho local storage
-function getLocalStorage() {
-  if (localStorage.getItem("CART") != undefined) {
-    var dataString = localStorage.getItem("CART");
-    cart.productArr = JSON.parse(dataString);
-    renderCart(cart.productArr);
-  }
 }

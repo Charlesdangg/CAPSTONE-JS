@@ -18,6 +18,10 @@ function Cart() {
   };
 
   this.purchase = function () {
+    if (this.productArr.length === 0) {
+      alert("Vui lòng chọn sản phẩm muốn mua");
+      return;
+    }
     this.productArr = [];
     alert("Thanh toán thành công");
   };
