@@ -56,8 +56,11 @@
             <li class="nav-item">
               <span>
                 <i class="fa-solid fa-cart-shopping"></i>
-                <a class="nav-link" href="#">Giỏ Hàng</a></span
+                <a href="#cart" class="nav-link" href="#" data-toggle="collapse"
+                  >Giỏ Hàng</a
+                ></span
               >
+              <div id="cart" class="collapse">Giỏ hàng trống</div>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#">Đăng Nhập</a>
@@ -73,14 +76,12 @@
         id="chooseProduct"
         class="chooseProduct my-5"
       >
-        <option value="Iphone">Chọn sản phẩm</option>
-        <option value="Iphone">Iphone</option>
-        <option value="SamSung">SamSung</option>
+        <option value="">Chọn sản phẩm</option>
+        <option value="Iphone">iPhone</option>
+        <option value="SamSung">Samsung</option>
       </select>
       <div id="product" class="product">
-        <div class="row">
-          <div class="col-12 col-lg-6"></div>
-        </div>
+        <div id="product__container" class="row px-5"></div>
       </div>
     </carousel>
 
@@ -101,5 +102,15 @@
       integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
       crossorigin="anonymous"
     ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.2.1/axios.min.js"
+      integrity="sha512-zJYu9ICC+mWF3+dJ4QC34N9RA0OVS1XtPbnf6oXlvGrLGNB8egsEzu/5wgG90I61hOOKvcywoLzwNmPqGAdATA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script src="../src/service/ProductServices.js"></script>
+    <script src="./../src/models/Products.js"></script>
+    <script src="../src/models/Cart.js"></script>
+    <script src="../src/controller/main.js"></script>
   </body>
 </html>
