@@ -1,0 +1,33 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+header {
+  color: white;
+}
+header .title__header {
+  text-align: center;
+  font-size: 50px;
+  color: blue;
+}
+
+.navbar {
+  justify-content: flex-start;
+}
+.navbar .navbar-brand {
+  color: white;
+  font-weight: 700;
+  font-size: larger;
+}
+
+.navbar-light .navbar-nav .nav-link {
+  color: white !important;
+}
+
+body {
+  height: 100vh;
+  width: 100%;
+  background: linear-gradient(45deg, #d2001a, #7462ff, #f48e21, #23d5ab);
+}/*# sourceMappingURL=style.css.map */
