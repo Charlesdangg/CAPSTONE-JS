@@ -1,6 +1,8 @@
 var productServices = new ProductServices();
 var productList = [];
 var cart = new Cart();
+var isFiltered = false;
+var listFilterProduct = [];
 
 // Set dữ liệu cho local storage
 function setLocalStorage() {
@@ -72,6 +74,7 @@ getEle("chooseProduct").addEventListener("change", function () {
   var type = getEle("chooseProduct").value;
   listFilterProduct = productList;
   if (type !== "") {
+    isFiltered = true;
     listFilterProduct = productList.filter(function (product) {
       return product.type.toLowerCase() === type.toLowerCase();
     });
@@ -133,7 +136,30 @@ function renderCart(data) {
 
 // Add product to cart
 function addProductToCart(index) {
-  var product = productList[index];
+  if (!isFiltered) {
+    var product = productList[index];
+    var isAdded = false;
+    for (let i = 0; i < cart.productArr.length; i++) {
+      const phone = cart.productArr[i];
+      if (product.id === phone.id) {
+        product.quantity += 1;
+        var totalPrice = product.quantity * product.price;
+        product.totalPrice = totalPrice;
+        isAdded = true;
+        break;
+      }
+    }
+    if (!isAdded) {
+      product.quantity = 1;
+      var totalPrice = product.quantity * product.price;
+      product.totalPrice = totalPrice;
+      cart.productArr.push(product);
+    }
+    setLocalStorage();
+    renderCart(cart.productArr);
+    return;
+  }
+  var product = listFilterProduct[index];
   var isAdded = false;
   for (let i = 0; i < cart.productArr.length; i++) {
     const phone = cart.productArr[i];
