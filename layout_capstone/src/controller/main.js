@@ -1,5 +1,5 @@
 var productServices = new ProductServices();
-var productList = [];
+var listProduct = [];
 var cart = new Cart();
 
 // Set dữ liệu cho local storage
@@ -18,6 +18,8 @@ function getLocalStorage() {
 }
 
 getLocalStorage();
+console.log(listProduct);
+console.log(cart.productArr);
 
 function getEle(id) {
   return document.getElementById(id);
@@ -52,13 +54,13 @@ function renderProducts(data) {
 // Get list product from api
 function getListProduct() {
   productServices
-    .getProductListApi()
+    .getListProductApi()
     .then(function (result) {
       var data = result.data;
       data.forEach((product) => {
-        productList.push(product);
+        listProduct.push(product);
       });
-      renderProducts(productList);
+      renderProducts(listProduct);
     })
     .catch(function (error) {
       console.log(error);
@@ -70,9 +72,14 @@ getListProduct();
 // Filter products
 getEle("chooseProduct").addEventListener("change", function () {
   var type = getEle("chooseProduct").value;
-  listFilterProduct = productList;
+  listFilterProduct = listProduct;
   if (type !== "") {
+<<<<<<< Updated upstream
     listFilterProduct = productList.filter(function (product) {
+=======
+    isFiltered = true;
+    listFilterProduct = listProduct.filter(function (product) {
+>>>>>>> Stashed changes
       return product.type.toLowerCase() === type.toLowerCase();
     });
   }
@@ -133,14 +140,41 @@ function renderCart(data) {
 
 // Add product to cart
 function addProductToCart(index) {
+<<<<<<< Updated upstream
   var product = productList[index];
-  var isAdded = false;
-  for (let i = 0; i < cart.productArr.length; i++) {
-    const phone = cart.productArr[i];
-    if (product.id === phone.id) {
-      product.quantity += 1;
+=======
+  if (!isFiltered) {
+    var product = listProduct[index];
+    var isAdded = false;
+    for (let i = 0; i < cart.productArr.length; i++) {
+      var phone = cart.productArr[i];
+      if (product.id === phone.id) {
+        phone.quantity += 1;
+        var totalPrice = phone.quantity * phone.price;
+        phone.totalPrice = totalPrice;
+        isAdded = true;
+        break;
+      }
+    }
+    if (!isAdded) {
+      product.quantity = 1;
       var totalPrice = product.quantity * product.price;
       product.totalPrice = totalPrice;
+      cart.productArr.push(product);
+    }
+    setLocalStorage();
+    renderCart(cart.productArr);
+    return;
+  }
+  var product = listFilterProduct[index];
+>>>>>>> Stashed changes
+  var isAdded = false;
+  for (let i = 0; i < cart.productArr.length; i++) {
+    var phone = cart.productArr[i];
+    if (product.id === phone.id) {
+      phone.quantity += 1;
+      var totalPrice = phone.quantity * phone.price;
+      phone.totalPrice = totalPrice;
       isAdded = true;
       break;
     }
