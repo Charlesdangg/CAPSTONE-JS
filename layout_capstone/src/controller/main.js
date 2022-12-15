@@ -1,6 +1,8 @@
 var productServices = new ProductServices();
 var listProduct = [];
 var cart = new Cart();
+var isFiltered = false;
+var listFilterProduct = [];
 
 // Set dữ liệu cho local storage
 function setLocalStorage() {
@@ -18,8 +20,6 @@ function getLocalStorage() {
 }
 
 getLocalStorage();
-console.log(listProduct);
-console.log(cart.productArr);
 
 function getEle(id) {
   return document.getElementById(id);
@@ -74,12 +74,8 @@ getEle("chooseProduct").addEventListener("change", function () {
   var type = getEle("chooseProduct").value;
   listFilterProduct = listProduct;
   if (type !== "") {
-<<<<<<< Updated upstream
-    listFilterProduct = productList.filter(function (product) {
-=======
     isFiltered = true;
     listFilterProduct = listProduct.filter(function (product) {
->>>>>>> Stashed changes
       return product.type.toLowerCase() === type.toLowerCase();
     });
   }
@@ -140,9 +136,6 @@ function renderCart(data) {
 
 // Add product to cart
 function addProductToCart(index) {
-<<<<<<< Updated upstream
-  var product = productList[index];
-=======
   if (!isFiltered) {
     var product = listProduct[index];
     var isAdded = false;
@@ -167,7 +160,6 @@ function addProductToCart(index) {
     return;
   }
   var product = listFilterProduct[index];
->>>>>>> Stashed changes
   var isAdded = false;
   for (let i = 0; i < cart.productArr.length; i++) {
     var phone = cart.productArr[i];
