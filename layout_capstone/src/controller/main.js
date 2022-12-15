@@ -1,5 +1,5 @@
 var productServices = new ProductServices();
-var productList = [];
+var listProduct = [];
 var cart = new Cart();
 var isFiltered = false;
 var listFilterProduct = [];
@@ -54,13 +54,13 @@ function renderProducts(data) {
 // Get list product from api
 function getListProduct() {
   productServices
-    .getProductListApi()
+    .getListProductApi()
     .then(function (result) {
       var data = result.data;
       data.forEach((product) => {
-        productList.push(product);
+        listProduct.push(product);
       });
-      renderProducts(productList);
+      renderProducts(listProduct);
     })
     .catch(function (error) {
       console.log(error);
@@ -72,10 +72,10 @@ getListProduct();
 // Filter products
 getEle("chooseProduct").addEventListener("change", function () {
   var type = getEle("chooseProduct").value;
-  listFilterProduct = productList;
+  listFilterProduct = listProduct;
   if (type !== "") {
     isFiltered = true;
-    listFilterProduct = productList.filter(function (product) {
+    listFilterProduct = listProduct.filter(function (product) {
       return product.type.toLowerCase() === type.toLowerCase();
     });
   }
@@ -137,14 +137,14 @@ function renderCart(data) {
 // Add product to cart
 function addProductToCart(index) {
   if (!isFiltered) {
-    var product = productList[index];
+    var product = listProduct[index];
     var isAdded = false;
     for (let i = 0; i < cart.productArr.length; i++) {
-      const phone = cart.productArr[i];
+      var phone = cart.productArr[i];
       if (product.id === phone.id) {
-        product.quantity += 1;
-        var totalPrice = product.quantity * product.price;
-        product.totalPrice = totalPrice;
+        phone.quantity += 1;
+        var totalPrice = phone.quantity * phone.price;
+        phone.totalPrice = totalPrice;
         isAdded = true;
         break;
       }
@@ -162,11 +162,11 @@ function addProductToCart(index) {
   var product = listFilterProduct[index];
   var isAdded = false;
   for (let i = 0; i < cart.productArr.length; i++) {
-    const phone = cart.productArr[i];
+    var phone = cart.productArr[i];
     if (product.id === phone.id) {
-      product.quantity += 1;
-      var totalPrice = product.quantity * product.price;
-      product.totalPrice = totalPrice;
+      phone.quantity += 1;
+      var totalPrice = phone.quantity * phone.price;
+      phone.totalPrice = totalPrice;
       isAdded = true;
       break;
     }
