@@ -22,15 +22,11 @@ const renderHTML = (data) => {
                 <td>${item.screen}</td>
                 <td>${item.backCamera}</td>
                 <td>${item.frontCamera}</td>
-                <td> <img src="${
-                  item.img
-                }" alt=""  style="width: 50px" />   </td>
+                <td> <img src="${item.img}" alt=""  style="width: 50px" />   </td>
                 <td>${item.desc}</td>
-                <td>${item.type === "1" ? "SamSung" : "IPhone"}</td>
+                <td>${item.type}</td>
                  <td>
-                    <button class="btn btn-danger"  onclick="deleteSP(${
-                      item.id
-                    })"  >
+                    <button class="btn btn-danger"  onclick="deleteSP(${item.id})"  >
                     Xóa 
                     </button>
 
